@@ -1,0 +1,29 @@
+version: '3'
+services:
+  nginx-letsencrypt:
+    image: jrcs/letsencrypt-nginx-proxy-companion
+    environment:
+      - NGINX_DOCKER_GEN_CONTAINER=theirstory-nginx-gen-container
+    restart: always
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:rw
+      - nginxconfd:/etc/nginx/conf.d
+      - vhost:/etc/nginx/vhost.d
+      - nginxhtml:/usr/share/nginx/html
+      - certs:/etc/nginx/certs:rw
+    # volumes_from:
+      # - nginx
+    depends_on:
+      - nginx
+    #   - nginx-gen
+
+  node:
+    environment:
+      - NODE_ENV=production
+      - BASE_URL=theirstory.io
+
+  react:
+    environment:
+      - VIRTUAL_HOST=theirstory.io,www.theirstory.io,165.227.122.183
+      - NODE_ENV=production
+    command: bash -c "npm run build && node server.js"

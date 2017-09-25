@@ -1,0 +1,19 @@
+version: '3'
+services:
+  # golang:
+  #   volumes:
+  #     - ./golang/src/app:/go/src/app
+
+  node:
+    environment:
+      - NODE_ENV=development
+      - BASE_URL=localhost
+    volumes:
+      - ./node:/node
+    command: bash -c "nodemon server.js --exec ../install/node_modules/.bin/babel-node --presets es2015,stage-2"
+
+  react:
+    volumes:
+      - ./react:/react
+    # command: bash -c "concurrently \"webpack --watch --watch-polling --config webpack.config.js\" \"./node_modules/.bin/nodemon server.js\""
+    # command: ./docker-entrypoint.sh
