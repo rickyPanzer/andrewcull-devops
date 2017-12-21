@@ -1,5 +1,5 @@
-docker-machine env btcmp
-eval $(docker-machine env btcmp)
+docker-machine env andrewcull
+eval $(docker-machine env andrewcull)
 
 docker volume rm $(docker volume ls -qf dangling=true)
 docker stop $(docker ps -a -q)

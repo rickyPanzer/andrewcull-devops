@@ -4,13 +4,17 @@ services:
   #   volumes:
   #     - ./golang/src/app:/go/src/app
 
-  node:
-    environment:
-      - NODE_ENV=development
-      - BASE_URL=localhost
+  golang:
     volumes:
-      - ./node:/node
-    command: bash -c "nodemon server.js --exec ../install/node_modules/.bin/babel-node --presets es2015,stage-2"
+      - ./golang/app:/go/src/github.com/user/myProject/app
+
+  # node:
+  #   environment:
+  #     - NODE_ENV=development
+  #     - BASE_URL=localhost
+  #   volumes:
+  #     - ./node:/node
+  #   command: bash -c "nodemon server.js --exec ../install/node_modules/.bin/babel-node --presets es2015,stage-2"
 
   react:
     volumes:
